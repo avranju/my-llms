@@ -1,0 +1,46 @@
+services:
+  ollama:
+    image: ollama/ollama:0.5.11
+    container_name: ollama
+    restart: unless-stopped
+    gpus:
+      - driver: nvidia
+        count: 1
+    environment:
+      - OLLAMA_ORIGINS=*
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama-data:/root/.ollama
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-v1.61.3
+    container_name: litellm
+    restart: unless-stopped
+    environment:
+      - ANTHROPIC_API_KEY=### YOUR ANTHROPIC API KEY ###
+    ports:
+      - 4000:4000
+    volumes:
+      - $PWD/litellm-config.yaml:/app/config.yaml
+    command: ["--config", "/app/config.yaml", "--detailed_debug"]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:v0.5.14
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - 6173:8080
+    volumes:
+      - open-webui-data:/app/backend/data
+    depends_on:
+      - ollama
+    environment:
+      - 'OLLAMA_BASE_URL=http://ollama:11434'
+      - 'WEBUI_SECRET_KEY='
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+volumes:
+  ollama-data:
+  open-webui-data:

@@ -1,0 +1,4 @@
+services:
+  litellm:
+    environment:
+      - ANTHROPIC_API_KEY=### YOUR ANTHROPIC API KEY HERE ###
