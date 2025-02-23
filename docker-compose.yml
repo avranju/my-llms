@@ -23,10 +23,10 @@ services:
       - 4000:4000
     volumes:
       - $PWD/litellm-config.yaml:/app/config.yaml
-    command: ["--config", "/app/config.yaml", "--detailed_debug"]
+    command: ["--config", "/app/config.yaml"]
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.5.14
+    image: ghcr.io/open-webui/open-webui:v0.5.16
     container_name: open-webui
     restart: unless-stopped
     ports:

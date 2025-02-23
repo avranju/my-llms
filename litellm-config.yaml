@@ -1,5 +1,11 @@
 model_list:
-    - model_name: claude-3.5 ### RECEIVED MODEL NAME ###
-      litellm_params: # all params accepted by litellm.completion() - https://docs.litellm.ai/docs/completion/input
-          model: claude-3-5-sonnet-20241022 ### MODEL NAME sent to `litellm.completion()` ###
-          api_key: 'os.environ/ANTHROPIC_API_KEY' # does os.getenv("AZURE_API_KEY_EU")
+  - model_name: claude-3.5 ### RECEIVED MODEL NAME ###
+    litellm_params: # all params accepted by litellm.completion() - https://docs.litellm.ai/docs/completion/input
+      model: claude-3-5-sonnet-20241022 ### MODEL NAME sent to `litellm.completion()` ###
+      api_key: 'os.environ/ANTHROPIC_API_KEY' # does os.getenv("AZURE_API_KEY_EU")
+  - model_name: gpt-4o
+    litellm_params:
+      model: azure/gpt-4o
+      api_base: 'os.environ/AZURE_API_BASE'
+      api_version: 'os.environ/AZURE_API_VERSION'
+      api_key: 'os.environ/AZURE_API_KEY'

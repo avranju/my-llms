@@ -2,3 +2,6 @@ services:
   litellm:
     environment:
       - ANTHROPIC_API_KEY=### YOUR ANTHROPIC API KEY HERE ###
+      - AZURE_API_KEY=### YOUR AZURE API KEY HERE ###
+      - AZURE_API_BASE=### AZURE API ENDPOINT URL ###
+      - AZURE_API_VERSION=### AZURE API VERSION ###
