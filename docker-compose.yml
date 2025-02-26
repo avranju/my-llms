@@ -19,6 +19,10 @@ services:
     restart: unless-stopped
     environment:
       - ANTHROPIC_API_KEY=### YOUR ANTHROPIC API KEY ###
+      - AZURE_API_KEY=### YOUR AZURE API KEY HERE ###
+      - AZURE_API_BASE=### AZURE API ENDPOINT URL ###
+      - AZURE_API_VERSION=### AZURE API VERSION ###
+      - GEMINI_API_KEY=### GEMINI API KEY HERE ###
     ports:
       - 4000:4000
     volumes:
