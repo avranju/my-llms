@@ -30,7 +30,7 @@ services:
     command: ["--config", "/app/config.yaml"]
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.5.18
+    image: ghcr.io/open-webui/open-webui:v0.5.19
     container_name: open-webui
     restart: unless-stopped
     ports:
