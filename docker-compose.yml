@@ -14,10 +14,13 @@ services:
       - ollama-data:/root/.ollama
 
   litellm:
-    image: ghcr.io/berriai/litellm:main-v1.61.3
+    image: ghcr.io/berriai/litellm-database:main-v1.63.6-nightly
     container_name: litellm
     restart: unless-stopped
     environment:
+      - LITELLM_MASTER_KEY=### YOUR LITELLM MASTER KEY ###
+      - LITELLM_SALT_KEY=### YOUR LITELLM SALT KEY ###
+      - DATABASE_URL=### YOUR DATABASE URL ###
       - ANTHROPIC_API_KEY=### YOUR ANTHROPIC API KEY ###
       - AZURE_API_KEY=### YOUR AZURE API KEY HERE ###
       - AZURE_API_BASE=### AZURE API ENDPOINT URL ###
@@ -28,6 +31,18 @@ services:
     volumes:
       - $PWD/litellm-config.yaml:/app/config.yaml
     command: ["--config", "/app/config.yaml"]
+
+  db:
+    image: postgres:17
+    container_name: db
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=### YOUR POSTGRES USER ###
+      - POSTGRES_PASSWORD=### YOUR POSTGRES PASSWORD ###
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:v0.5.20
@@ -48,3 +63,4 @@ services:
 volumes:
   ollama-data:
   open-webui-data:
+  db-data:
