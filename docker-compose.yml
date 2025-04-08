@@ -45,7 +45,7 @@ services:
       - POSTGRES_PASSWORD=### YOUR POSTGRES PASSWORD ###
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.5.20
+    image: ghcr.io/open-webui/open-webui:v0.6.2
     container_name: open-webui
     restart: unless-stopped
     ports:
