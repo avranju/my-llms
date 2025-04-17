@@ -1,18 +1,4 @@
 services:
-  ollama:
-    image: ollama/ollama:0.6.5
-    container_name: ollama
-    restart: unless-stopped
-    gpus:
-      - driver: nvidia
-        count: 1
-    environment:
-      - OLLAMA_ORIGINS=*
-    ports:
-      - 11434:11434
-    volumes:
-      - ollama-data:/root/.ollama
-
   litellm:
     image: ghcr.io/berriai/litellm-database:main-v1.63.6-nightly
     container_name: litellm
@@ -26,6 +12,7 @@ services:
       - AZURE_API_BASE=### AZURE API ENDPOINT URL ###
       - AZURE_API_VERSION=### AZURE API VERSION ###
       - GEMINI_API_KEY=### GEMINI API KEY HERE ###
+      - OPENAI_API_KEY=### YOUR OPENAI API KEY ###
     ports:
       - 4000:4000
     volumes:
@@ -36,8 +23,6 @@ services:
     image: postgres:17
     container_name: db
     restart: unless-stopped
-    ports:
-      - 5432:5432
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
@@ -52,15 +37,9 @@ services:
       - 6173:8080
     volumes:
       - open-webui-data:/app/backend/data
-    depends_on:
-      - ollama
-    environment:
-      - 'OLLAMA_BASE_URL=http://ollama:11434'
-      - 'WEBUI_SECRET_KEY='
     extra_hosts:
       - host.docker.internal:host-gateway
 
 volumes:
-  ollama-data:
   open-webui-data:
   db-data:

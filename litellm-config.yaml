@@ -27,3 +27,7 @@ model_list:
     litellm_params:
       model: gemini/gemini-2.0-flash-thinking-exp-01-21
       api_key: "os.environ/GEMINI_API_KEY"
+  - model_name: "*"             # all requests where model not in your config go to this deployment
+    litellm_params:
+      model: openai/*           # set `openai/` to use the openai route
+      api_key: "os.environ/OPENAI_API_KEY"
